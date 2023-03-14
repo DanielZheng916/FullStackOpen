@@ -12,6 +12,11 @@ const App = () => {
   const addGood = () => setGood(good+1)
   const addNeutral = () => setNeutral(neutral+1)
   const addBad = () => setBad(bad+1)
+
+  let all = good + neutral + bad;
+  let allScore = good - bad;
+  let average = allScore/all;
+  let positive = 100*good/all + '%';
   
 
   return (
@@ -24,6 +29,9 @@ const App = () => {
       <Comment commentType="good" num={good}></Comment>
       <Comment commentType="neutral" num={neutral}></Comment>
       <Comment commentType="bad" num={bad}></Comment>
+      <Comment commentType="all" num={all}></Comment>
+      <Comment commentType="average" num={average}></Comment>
+      <Comment commentType="positive" num={positive}></Comment>
     </div>
   )
 }
