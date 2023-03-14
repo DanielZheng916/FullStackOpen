@@ -6,6 +6,7 @@ const App = () => {
   const exercises2 = 7
   const part3 = 'State of a component'
   const exercises3 = 14
+  const exs = [exercises1, exercises2, exercises3]
 
   return (
     <div>
@@ -13,7 +14,7 @@ const App = () => {
       <Content part = {part1} exercises = {exercises1}></Content>
       <Content part = {part2} exercises = {exercises2}></Content>
       <Content part = {part3} exercises = {exercises3}></Content>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <Total exs = {exs}></Total>
     </div>
   )
 }
@@ -30,6 +31,18 @@ const Content = (props) => {
   return (
     <p>
         {props.part} {props.exercises}
+    </p>
+  )
+}
+
+const Total = (props) => {
+  let sum = 0;
+  for (let i = 0; i < props.exs.length; i++) {
+    sum += props.exs[i];
+  }
+  return (
+    <p>
+        Number of exercises {sum}
     </p>
   )
 }
