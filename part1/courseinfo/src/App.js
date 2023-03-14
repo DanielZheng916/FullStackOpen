@@ -7,13 +7,12 @@ const App = () => {
   const part3 = 'State of a component'
   const exercises3 = 14
   const exs = [exercises1, exercises2, exercises3]
+  const partExercises = [{id:1, part:part1, exercises:exercises1}, {id:2, part:part2, exercises:exercises2}, {id:3, part:part3, exercises:exercises3}];
 
   return (
     <div>
       <Header course={course}></Header>
-      <Content part = {part1} exercises = {exercises1}></Content>
-      <Content part = {part2} exercises = {exercises2}></Content>
-      <Content part = {part3} exercises = {exercises3}></Content>
+      <Content partExercises={partExercises}></Content>
       <Total exs = {exs}></Total>
     </div>
   )
@@ -29,8 +28,18 @@ const Header = (props) => {
 
 const Content = (props) => {
   return (
+    <div>
+        {props.partExercises.map((item) => (
+          <Part key={item.id} partExercise={item}></Part>
+        ))}
+    </div>
+  )
+}
+
+const Part = (props) => {
+  return (
     <p>
-        {props.part} {props.exercises}
+        {props.partExercise.part} {props.partExercise.exercises}
     </p>
   )
 }
