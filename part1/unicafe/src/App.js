@@ -13,12 +13,6 @@ const App = () => {
   const addNeutral = () => setNeutral(neutral+1)
   const addBad = () => setBad(bad+1)
 
-  let all = good + neutral + bad;
-  let allScore = good - bad;
-  let average = allScore/all;
-  let positive = 100*good/all + '%';
-  
-
   return (
     <div>
       <h1>give feedback</h1>
@@ -26,12 +20,7 @@ const App = () => {
       <Button commentType="neutral" handler={addNeutral}></Button>
       <Button commentType="bad" handler={addBad}></Button>
       <h1>statistics</h1>
-      <Statistics commentType="good" num={good}></Statistics>
-      <Statistics commentType="neutral" num={neutral}></Statistics>
-      <Statistics commentType="bad" num={bad}></Statistics>
-      <Statistics commentType="all" num={all}></Statistics>
-      <Statistics commentType="average" num={average}></Statistics>
-      <Statistics commentType="positive" num={positive}></Statistics>
+      <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
     </div>
   )
 }
@@ -42,11 +31,29 @@ const Button = ({commentType, handler}) => {
   )
 }
 
-const Statistics = ({commentType, num}) => {
+const Comment = ({commentType, num}) => {
   return (
     <div>
       {commentType} {num}
     </div>
+  )
+}
+
+const Statistics = ({good, neutral, bad}) => {
+  let all = good + neutral + bad;
+  let allScore = good - bad;
+  let average = allScore/all;
+  let positive = 100*good/all + '%';
+
+  return (
+    <>
+      <Comment commentType="good" num={good}></Comment>
+      <Comment commentType="neutral" num={neutral}></Comment>
+      <Comment commentType="bad" num={bad}></Comment>
+      <Comment commentType="all" num={all}></Comment>
+      <Comment commentType="average" num={average}></Comment>
+      <Comment commentType="positive" num={positive}></Comment>
+    </>
   )
 }
 
