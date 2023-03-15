@@ -31,7 +31,7 @@ const Button = ({commentType, handler}) => {
   )
 }
 
-const Comment = ({commentType, num}) => {
+const StatisticLine = ({commentType, num}) => {
   return (
     <div>
       {commentType} {num}
@@ -52,12 +52,12 @@ const Statistics = ({good, neutral, bad}) => {
   } else {
     return (
       <>
-        <Comment commentType="good" num={good}></Comment>
-        <Comment commentType="neutral" num={neutral}></Comment>
-        <Comment commentType="bad" num={bad}></Comment>
-        <Comment commentType="all" num={all}></Comment>
-        <Comment commentType="average" num={average}></Comment>
-        <Comment commentType="positive" num={positive}></Comment>
+        <StatisticLine commentType="good" num={good}></StatisticLine>
+        <StatisticLine commentType="neutral" num={neutral}></StatisticLine>
+        <StatisticLine commentType="bad" num={bad}></StatisticLine>
+        <StatisticLine commentType="all" num={all}></StatisticLine>
+        <StatisticLine commentType="average" num={average}></StatisticLine>
+        <StatisticLine commentType="positive" num={positive}></StatisticLine>
       </>
     )
   }
