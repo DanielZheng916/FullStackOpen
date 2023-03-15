@@ -45,16 +45,23 @@ const Statistics = ({good, neutral, bad}) => {
   let average = allScore/all;
   let positive = 100*good/all + '%';
 
-  return (
-    <>
-      <Comment commentType="good" num={good}></Comment>
-      <Comment commentType="neutral" num={neutral}></Comment>
-      <Comment commentType="bad" num={bad}></Comment>
-      <Comment commentType="all" num={all}></Comment>
-      <Comment commentType="average" num={average}></Comment>
-      <Comment commentType="positive" num={positive}></Comment>
-    </>
-  )
+  if (all === 0) {
+    return (
+      <div>No feedback given</div>
+    )
+  } else {
+    return (
+      <>
+        <Comment commentType="good" num={good}></Comment>
+        <Comment commentType="neutral" num={neutral}></Comment>
+        <Comment commentType="bad" num={bad}></Comment>
+        <Comment commentType="all" num={all}></Comment>
+        <Comment commentType="average" num={average}></Comment>
+        <Comment commentType="positive" num={positive}></Comment>
+      </>
+    )
+  }
+  
 }
 
 export default App
