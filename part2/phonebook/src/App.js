@@ -5,19 +5,21 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: '040-1234567' }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault();
-    const newPerson = { name: newName};
+    const newPerson = { name: newName, number: newNumber};
     if (havePerson(persons, newPerson)) {
       alert(`${newName} is already added to phonebook`)
     } else {
       setPersons(persons.concat(newPerson));
     }
     setNewName('');
+    setNewNumber('');
   }
 
   const havePerson = (persons, newPerson) => {
@@ -35,12 +37,19 @@ const App = () => {
     setNewName(event.target.value);
   }
 
+  const changeNewNumber = (event) => {
+    setNewNumber(event.target.value);
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
       <form>
         <div>
           name: <input onChange={changeNewName} value={newName}/>
+        </div>
+        <div>
+          number: <input onChange={changeNewNumber} value={newNumber} />
         </div>
         <div>
           <button type="submit" onClick={addPerson}>add</button>
@@ -56,7 +65,7 @@ const App = () => {
 
 const Person = (props) => {
   return (
-    <div>{props.person.name}</div>
+    <div>{props.person.name} {props.person.number}</div>
   )
 }
 
