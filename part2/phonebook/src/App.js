@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
+import personService from './services/persons'
 
 import { useState, useEffect } from 'react'
 
@@ -12,10 +13,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
 
   const initHook = () => {
-    axios.get('http://localhost:3001/persons')
-         .then(response => {
-            setPersons(response.data)
-          })
+    personService.getAll()
+    .then(person => setPersons(person))
   }
 
   useEffect(initHook,[])
