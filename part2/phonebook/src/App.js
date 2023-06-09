@@ -43,6 +43,20 @@ const App = () => {
     }
   }
 
+  const deletePerson = (id) => {
+    console.log(id)
+    const person = persons.filter(person => person.id === id);
+    const personId = person[0].id;
+    const personName = person[0].name;
+    console.log(personName)
+    if (window.confirm(`Do you want to delete ${personName}`)) {
+      console.log(`Delete confirmed for ${personName}`);
+      personService.remove(id);
+      setPersons(persons.filter(person => person.id != personId));
+
+    }
+  }
+
   const changeNewName = (event) => {
     setNewName(event.target.value);
   }
@@ -67,7 +81,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map(person => <Person key={person.name} person={person}></Person>)}
+        {persons.map(person => <Person key={person.name} person={person} deletePerson={deletePerson}></Person>)}
       </ul>
     </div>
   )
@@ -75,7 +89,7 @@ const App = () => {
 
 const Person = (props) => {
   return (
-    <div>{props.person.name} {props.person.number}</div>
+    <div>{props.person.name} {props.person.number} <button onClick={() => props.deletePerson(props.person.id)}>delete</button></div>
   )
 }
 
