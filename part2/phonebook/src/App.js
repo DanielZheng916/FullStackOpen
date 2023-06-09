@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
 import personService from './services/persons'
+import Person from './components/Person';
 
 import { useState, useEffect } from 'react'
 
@@ -25,8 +26,10 @@ const App = () => {
     if (havePerson(persons, newPerson)) {
       alert(`${newName} is already added to phonebook`)
     } else {
-      setPersons(persons.concat(newPerson));
-      personService.create(newPerson);
+      // setPersons(persons.concat(newPerson));
+      personService
+        .create(newPerson)
+        .then(createdPerson => setPersons(persons.concat(createdPerson)));
     }
     setNewName('');
     setNewNumber('');
@@ -84,12 +87,6 @@ const App = () => {
         {persons.map(person => <Person key={person.name} person={person} deletePerson={deletePerson}></Person>)}
       </ul>
     </div>
-  )
-}
-
-const Person = (props) => {
-  return (
-    <div>{props.person.name} {props.person.number} <button onClick={() => props.deletePerson(props.person.id)}>delete</button></div>
   )
 }
 
