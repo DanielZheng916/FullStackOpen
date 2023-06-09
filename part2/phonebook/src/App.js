@@ -26,6 +26,7 @@ const App = () => {
       alert(`${newName} is already added to phonebook`)
     } else {
       setPersons(persons.concat(newPerson));
+      personService.create(newPerson);
     }
     setNewName('');
     setNewNumber('');
