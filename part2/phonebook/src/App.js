@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios'
 import personService from './services/persons'
 import Person from './components/Person';
+import Notification from './components/Notification';
 
 import { useState, useEffect } from 'react'
 
@@ -12,6 +13,7 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [message, setMessage] = useState(null)
 
   const initHook = () => {
     personService.getAll()
@@ -29,7 +31,13 @@ const App = () => {
       // setPersons(persons.concat(newPerson));
       personService
         .create(newPerson)
-        .then(createdPerson => setPersons(persons.concat(createdPerson)));
+        .then(createdPerson => {
+          setPersons(persons.concat(createdPerson))
+          setMessage(`Added ${createdPerson.name}`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+        });
     }
     setNewName('');
     setNewNumber('');
@@ -71,6 +79,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message}></Notification>
       <form>
         <div>
           name: <input onChange={changeNewName} value={newName}/>
